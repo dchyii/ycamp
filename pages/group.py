@@ -18,7 +18,7 @@ if not check_password():
 load_dotenv('.env')
 url = os.getenv("LINK")
 conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(spreadsheet=url, usecols=[0,1,2,3,5,6,7,8,9])
+df = conn.read(spreadsheet=url, ttl=60, usecols=[0,1,2,3,5,6,7,8,9])
 
 # st.dataframe(df)
 
