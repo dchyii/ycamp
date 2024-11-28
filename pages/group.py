@@ -6,16 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 
 st.set_page_config(page_title="研習營", layout="wide", initial_sidebar_state="collapsed")
-st.markdown(
-    """
-    <style>
-        div[data-testid="stSidebarCollapsedControl"] {
-            visibility: hidden;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 
 st.title("全球青少年研習營")
 
@@ -33,23 +24,21 @@ df = conn.read(spreadsheet=url, usecols=[0,1,2,3,5,6,7,8,9])
 
 # Form for serial number input
 with st.form("display_details"):
-    name_input = st.text_input("請輸入您的姓名 Please enter your name in Chinese:")
+    group_input = st.text_input("請輸入组别号数:")
 
     submitted = st.form_submit_button("Submit")
     if submitted:
         # Convert serial number input to match dataframe column type
         # try:
-        name = str(name_input)  # Convert to int if `编号` column is numeric
+        groupsn = str(group_input)  # Convert to int if `编号` column is numeric
+        group = "第 " + groupsn + " 組"
         # except ValueError:
         #     sn = serial_number  # Keep as string if the column is string type
 
         # Filter the dataframe
-        detailsdf = df[df['姓名'] == name]
+        detailsdf = df[df['組別'] == group]
 
         if detailsdf.empty:
-            st.warning("沒有此學員資料。請確認您的名字。")
+            st.warning("沒有此組別資料。請確認您的組別號數。")
         else:
             st.dataframe(detailsdf)
-
-
-# st.write("hello")
