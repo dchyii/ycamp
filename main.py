@@ -45,6 +45,6 @@ with st.form("display_details"):
         if detailsdf.empty:
             st.warning("沒有此學員資料。請確認您的名字。")
         else:
-            st.dataframe(detailsdf,hide_index=True)
+            st.dataframe(detailsdf,hide_index=True, use_container_width=True)
 
 

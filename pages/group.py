@@ -9,6 +9,7 @@ st.set_page_config(page_title="研習營", layout="wide", initial_sidebar_state=
 
 
 st.title("全球青少年研習營")
+st.subheader("小組資料")
 
 # Check if the password is correct.  
 if not check_password():  
@@ -38,4 +39,4 @@ with st.form("display_details"):
         if detailsdf.empty:
             st.warning("沒有此組別資料。請確認您的組別號數。")
         else:
-            st.dataframe(detailsdf,hide_index=True)
+            st.dataframe(detailsdf,hide_index=True, use_container_width=True)
