@@ -27,21 +27,17 @@ if not check_password():
 load_dotenv('.env')
 url = os.getenv("LINK")
 conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(spreadsheet=url, ttl=60, usecols=[0,1,2,3,5,6,7,8,9])
+df = conn.read(spreadsheet=url, ttl=60, usecols=[0,1,2,3,5,6,7,8,9,10])
 
 # st.dataframe(df)
 
-# Form for serial number input
+# Form 
 with st.form("display_details"):
     name_input = st.text_input("請輸入您的姓名 Please enter your name in Chinese:")
 
     submitted = st.form_submit_button("Submit")
     if submitted:
-        # Convert serial number input to match dataframe column type
-        # try:
-        name = str(name_input)  # Convert to int if `编号` column is numeric
-        # except ValueError:
-        #     sn = serial_number  # Keep as string if the column is string type
+        name = str(name_input)  # Convert to str
 
         # Filter the dataframe
         detailsdf = df[df['姓名'] == name]
@@ -49,7 +45,6 @@ with st.form("display_details"):
         if detailsdf.empty:
             st.warning("沒有此學員資料。請確認您的名字。")
         else:
-            st.dataframe(detailsdf)
+            st.dataframe(detailsdf,hide_index=True, use_container_width=True)
 
 
-# st.write("hello")
