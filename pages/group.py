@@ -18,7 +18,7 @@ if not check_password():
 load_dotenv('.env')
 url = os.getenv("LINK")
 conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(spreadsheet=url, ttl=60, usecols=[0,1,2,3,5,6,7,8,9])
+df = conn.read(spreadsheet=url, ttl=60, usecols=[0,1,2,3,5,6,7,8,9,10])
 
 # st.dataframe(df)
 
@@ -41,4 +41,4 @@ with st.form("display_details"):
         if detailsdf.empty:
             st.warning("沒有此組別資料。請確認您的組別號數。")
         else:
-            st.dataframe(detailsdf)
+            st.dataframe(detailsdf,hide_index=True)
