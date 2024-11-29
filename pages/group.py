@@ -22,18 +22,15 @@ df = conn.read(spreadsheet=url, ttl=60, usecols=[0,1,2,3,5,6,7,8,9,10])
 
 # st.dataframe(df)
 
-# Form for serial number input
+# Form 
 with st.form("display_details"):
     group_input = st.text_input("請輸入组别号数:")
 
     submitted = st.form_submit_button("Submit")
     if submitted:
-        # Convert serial number input to match dataframe column type
-        # try:
-        groupsn = str(group_input)  # Convert to int if `编号` column is numeric
+
+        groupsn = str(group_input)  # Convert to str
         group = "第 " + groupsn + " 組"
-        # except ValueError:
-        #     sn = serial_number  # Keep as string if the column is string type
 
         # Filter the dataframe
         detailsdf = df[df['組別'] == group]
