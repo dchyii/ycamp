@@ -44,4 +44,21 @@ with st.form("display_details"):
         if detailsdf.empty:
             st.warning("沒有此組別資料。請確認您所屬的道場。")
         else:
+            data_container = st.container(border=True)
+            with data_container:
+                st.markdown("**道場數據**")
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    dcdf = detailsdf["職責"].value_counts()
+                    st.dataframe(dcdf, use_container_width=True)
+
+                with col2:
+                    genderdf = detailsdf["乾坤"].value_counts()
+                    st.dataframe(genderdf, use_container_width=True)
+
+                with col3:
+                    daysdf = detailsdf["參與日期"].value_counts()
+                    st.dataframe(daysdf, use_container_width=True)
+            st.divider()
+            st.markdown("**道場名單**")
             st.dataframe(detailsdf,hide_index=True, use_container_width=True)
