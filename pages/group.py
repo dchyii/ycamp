@@ -6,6 +6,17 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 
 st.set_page_config(page_title="研習營", layout="wide", initial_sidebar_state="collapsed")
+st.markdown(
+    """
+    <style>
+        div[data-testid="stSidebarCollapsedControl"] {
+            visibility: hidden;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 
 st.title("全球青少年研習營")
